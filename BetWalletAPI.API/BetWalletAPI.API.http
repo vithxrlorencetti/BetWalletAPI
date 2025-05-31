@@ -1,0 +1,6 @@
+@BetWalletAPI.API_HostAddress = http://localhost:5175
+
+GET {{BetWalletAPI.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
