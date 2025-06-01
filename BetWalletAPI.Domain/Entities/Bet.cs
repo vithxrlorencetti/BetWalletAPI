@@ -17,20 +17,21 @@ public class Bet : BaseEntity
 
     private Bet() { }
 
-    public static Bet Create(Guid playerId, Money stake, string description = "Bet created")
+    public static Bet Create(Guid playerId, Money stake, Guid betTransactionId, string description = "Bet created")
     {
-        if (stake.IsNegative || stake.IsZero || stake <= 1m)
-            throw new ArgumentException($"Bet stake must be at least {new Money(1.00m, stake.Currency)}.", nameof(stake));
+        if (stake.IsNegative || stake.IsZero || stake <= 1.00m)
+            throw new ArgumentException($"Bet stake must be at least {new Money(1.00m, stake.Currency)}.");
 
         if (string.IsNullOrWhiteSpace(description))
-            throw new ArgumentException("Bet description cannot be empty.", nameof(description));
+            throw new ArgumentException("Bet description cannot be empty.");
 
         return new Bet
         {
             PlayerId = playerId,
             Stake = stake,
             Status = BetStatus.Pending,
-            Description = description
+            Description = description,
+            BetTransactionId = betTransactionId,
         };
     }
 
