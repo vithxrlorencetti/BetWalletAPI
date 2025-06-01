@@ -60,7 +60,7 @@ namespace BetWalletAPI.Application.Services
             if (existingPlayerByEmail != null)
             {
                 _logger.LogWarning($"Registration attempt with existing email: {registerPlayerDto.Email}");
-                throw new EmailAlreadyExistsException(registerPlayerDto.Email);
+                throw new EmailAlreadyExistsException($"Email already exists: {registerPlayerDto.Email}");
             }
 
             var hashedPassword = _passwordHasher.Hash(registerPlayerDto.Password);

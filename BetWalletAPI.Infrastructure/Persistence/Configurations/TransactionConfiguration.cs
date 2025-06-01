@@ -45,6 +45,6 @@ public class TransactionConfiguration : IEntityTypeConfiguration<Transaction>
             .IsRequired(false);
 
         builder.Property(t => t.CreatedAt).IsRequired();
-        builder.Property(t => t.UpdatedAt).IsRequired();
+        builder.Property(t => t.UpdatedAt);
     }
 }

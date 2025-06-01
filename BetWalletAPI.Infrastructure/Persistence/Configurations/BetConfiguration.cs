@@ -37,6 +37,6 @@ public class BetConfiguration : IEntityTypeConfiguration<Bet>
             .HasMaxLength(500);
 
         builder.Property(b => b.CreatedAt).IsRequired();
-        builder.Property(b => b.UpdatedAt).IsRequired();
+        builder.Property(b => b.UpdatedAt);
     }
 }

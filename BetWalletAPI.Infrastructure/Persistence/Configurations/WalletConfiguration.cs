@@ -37,6 +37,6 @@ public class WalletConfiguration : IEntityTypeConfiguration<Wallet>
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.Property(w => w.CreatedAt).IsRequired();
-        builder.Property(w => w.UpdatedAt).IsRequired();
+        builder.Property(w => w.UpdatedAt);
     }
 }

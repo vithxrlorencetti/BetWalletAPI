@@ -41,24 +41,30 @@ public class ExceptionHandlingMiddleware
             case NotFoundException ex:
                 response.StatusCode = (int)HttpStatusCode.NotFound;
                 errorResponse.Message = ex.Message;
-                _logger.LogWarning(ex, "Resource not found: {Message}", ex.Message);
+                _logger.LogWarning(ex, ex.Message);
                 break;
 
             case InvalidCredentialsException ex:
                 response.StatusCode = (int)HttpStatusCode.Unauthorized;
                 errorResponse.Message = ex.Message;
-                _logger.LogWarning(ex, "Invalid credentials: {Message}", ex.Message);
+                _logger.LogWarning(ex, ex.Message);
                 break;
 
             case EmailAlreadyExistsException ex:
                 response.StatusCode = (int)HttpStatusCode.Conflict;
                 errorResponse.Message = ex.Message;
-                _logger.LogWarning(ex, "Email already exists: {Message}", ex.Message);
+                _logger.LogWarning(ex, ex.Message);
+                break;
+
+            case ArgumentException ex:
+                response.StatusCode = (int)HttpStatusCode.BadRequest;
+                errorResponse.Message = ex.Message;
+                _logger.LogWarning(ex, ex.Message);
                 break;
 
             default:
                 response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                errorResponse.Message = "An internal server error occurred. Please try again later.";
+                errorResponse.Message = "An internal server error occurred.";
                 _logger.LogError(exception, "Unhandled error: {Message}", exception.Message);
                 break;
         }

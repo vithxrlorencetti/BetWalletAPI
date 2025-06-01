@@ -35,6 +35,6 @@ public class PlayerConfiguration : IEntityTypeConfiguration<Player>
             .IsRequired();
 
         builder.Property(p => p.CreatedAt).IsRequired();
-        builder.Property(p => p.UpdatedAt).IsRequired();
+        builder.Property(p => p.UpdatedAt);
     }
 }

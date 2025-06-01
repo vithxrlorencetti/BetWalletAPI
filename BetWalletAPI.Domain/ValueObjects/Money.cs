@@ -2,8 +2,17 @@
 
 public record Money(decimal Amount, string Currency = "BRL")
 {
+    private static readonly HashSet<string> ValidCurrencies = new HashSet<string> { "BRL", "USD", "EUR" };
+
     public static Money Create(decimal amount, string currency = "BRL")
     {
+        currency = currency.ToUpper();
+
+        if (string.IsNullOrWhiteSpace(currency) || !ValidCurrencies.Contains(currency))
+        {
+            throw new ArgumentException($"Invalid currency: '{currency}'. Allowed currencies are BRL, USD, EUR.");
+        }
+
         return new Money(amount, currency);
     }
 

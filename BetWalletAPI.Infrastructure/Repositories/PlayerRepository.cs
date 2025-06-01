@@ -22,11 +22,7 @@ public class PlayerRepository : IPlayerRepository
 
     public async Task<Player?> GetByEmailAsync(Email email)
     {
-        return await _context.Players.Where(p => p.Email == email.Value).FirstOrDefaultAsync();
-
-        var a = await _context.Players.ToListAsync();
-
-        return a.FirstOrDefault();
+        return await _context.Players.Include(p => p.Wallet).FirstOrDefaultAsync(p => p.Email.Value == email.Value);
     }
 
     public async Task<Player> AddAsync(Player player)
