@@ -15,12 +15,10 @@ namespace BetWalletAPI.API.Controllers
     public class PlayerController : ControllerBase
     {
         private readonly IPlayerService _playerService;
-        private readonly ILogger<PlayerController> _logger;
 
         public PlayerController(IPlayerService playerService, ILogger<PlayerController> logger)
         {
             _playerService = playerService;
-            _logger = logger;
         }
 
         /// <summary>

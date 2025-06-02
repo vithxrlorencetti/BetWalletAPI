@@ -23,6 +23,8 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 
 builder.Services.AddScoped<IPlayerService, PlayerService>();
+builder.Services.AddScoped<IBetService, BetService>();
+builder.Services.AddScoped<ITransactionService, TransactionService>();
 
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
@@ -77,10 +79,10 @@ builder.Services.AddSwaggerGen(options =>
     {
         Name = "Authorization",
         Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
-        Scheme = "Bearer", // Esquema "Bearer"
+        Scheme = "Bearer",
         BearerFormat = "JWT",
         In = Microsoft.OpenApi.Models.ParameterLocation.Header,
-        Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\""
+        Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter your token in the text input below."
     });
 
     options.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
