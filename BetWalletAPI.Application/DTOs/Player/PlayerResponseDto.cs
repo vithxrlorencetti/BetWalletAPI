@@ -9,4 +9,6 @@ public class PlayerResponseDto
     public string Email { get; set; }
     public decimal Balance { get; set; }
     public string Currency { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
 }

@@ -99,11 +99,13 @@ namespace BetWalletAPI.Application.Services
 
             if (player == null)
             {
+                _logger.LogWarning($"Player with Email '{loginPlayerDto.Email}' not found.");
                 throw new NotFoundException($"Player with Email '{loginPlayerDto.Email}' not found."); 
             }
 
             if (!_passwordHasher.VerifyPassword(player.PasswordHash, loginPlayerDto.Password))
             {
+                _logger.LogWarning("Invalid credentials.");
                 throw new InvalidCredentialsException("Invalid credentials.");
             }
 
