@@ -80,4 +80,9 @@ public class Wallet : BaseEntity
     {
         return Credit(amount, TransactionType.Bonus, description);
     }
+
+    public Transaction RecordRefund(Money amount, string description = "Bet refund")
+    {
+        return Credit(amount, TransactionType.BetRefund, description);
+    }
 }

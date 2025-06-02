@@ -1,4 +1,5 @@
 ﻿using BetWalletAPI.Domain.Common;
+using BetWalletAPI.Domain.Enums;
 using BetWalletAPI.Domain.ValueObjects;
 
 namespace BetWalletAPI.Domain.Entities;
@@ -47,8 +48,5 @@ public class Player : BaseEntity
         SetUpdatedAt();
     }
 
-    public bool IsEligibleForBonus()
-    {
-        return ConsecutiveLosses >= 5;
-    }
+    public bool IsEligibleForBonus => ConsecutiveLosses >= 5;
 }

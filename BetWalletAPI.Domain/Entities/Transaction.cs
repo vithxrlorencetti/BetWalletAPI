@@ -14,7 +14,7 @@ public class Transaction : BaseEntity
 
     private Transaction() { }
 
-    internal static Transaction Create(Guid walletId, Money amount, TransactionType type, string description, Guid? referenceBetId = null)
+    public static Transaction Create(Guid walletId, Money amount, TransactionType type, string description, Guid? referenceBetId = null)
     {
         if (amount.IsNegative || amount.IsZero)
             throw new ArgumentException("Transaction amount must be positive.", nameof(amount));

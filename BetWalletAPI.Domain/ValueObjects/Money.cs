@@ -2,6 +2,8 @@
 
 public record Money(decimal Amount, string Currency = "BRL")
 {
+    private Money() : this(0m, "BRL") { }
+
     private static readonly HashSet<string> ValidCurrencies = new HashSet<string> { "BRL", "USD", "EUR" };
 
     public static Money Create(decimal amount, string currency = "BRL")

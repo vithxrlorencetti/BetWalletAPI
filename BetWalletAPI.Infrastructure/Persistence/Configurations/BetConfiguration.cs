@@ -18,14 +18,20 @@ public class BetConfiguration : IEntityTypeConfiguration<Bet>
         builder.OwnsOne(b => b.Stake, moneyBuilder =>
         {
             moneyBuilder.Property(m => m.Amount)
-                .HasColumnName("StakeAmount")
+                .HasColumnName("Stake")
                 .HasColumnType("decimal(18,2)")
                 .IsRequired();
 
-            moneyBuilder.Property(m => m.Currency)
-                .HasColumnName("StakeCurrency")
-                .IsRequired()
-                .HasMaxLength(3);
+            moneyBuilder.Ignore(m => m.Currency);
+        });
+
+        builder.OwnsOne(b => b.Prize, prizeBuilder =>
+        {
+            prizeBuilder.Property(m => m.Amount)
+                .HasColumnName("Prize")
+                .HasColumnType("decimal(18,2)");
+
+            prizeBuilder.Ignore(m => m.Currency);
         });
 
         builder.Property(b => b.Status)
