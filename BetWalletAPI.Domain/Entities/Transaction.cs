@@ -31,4 +31,15 @@ public class Transaction : BaseEntity
             ReferenceBetId = referenceBetId
         };
     }
+
+    public void SetReferenceBet(Guid betId)
+    {
+        if (ReferenceBetId != null)
+            throw new InvalidOperationException("Reference Bet ID has already been set.");
+
+        if (betId == Guid.Empty)
+            throw new ArgumentException("Invalid reference bet ID.", nameof(betId));
+
+        ReferenceBetId = betId;
+    }
 }

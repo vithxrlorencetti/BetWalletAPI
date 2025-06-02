@@ -58,6 +58,9 @@ public class BetService : IBetService
         bet.SetPlacementTransaction(debitTransaction.Id);
 
         await _unitOfWork.BetRepository.AddAsync(bet);
+
+        debitTransaction.SetReferenceBet(bet.Id);
+
         await _unitOfWork.TransactionRepository.AddAsync(debitTransaction);
         await _unitOfWork.WalletRepository.UpdateAsync(wallet);
 

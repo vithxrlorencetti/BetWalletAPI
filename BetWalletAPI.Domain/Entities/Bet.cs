@@ -20,7 +20,7 @@ public class Bet : BaseEntity
 
     public static Bet Create(Guid playerId, Money stake, string description = "Bet created")
     {
-        if (stake.IsNegative || stake.IsZero || stake <= 1.00m)
+        if (stake.IsNegative || stake.IsZero || stake < 1.00m)
             throw new ArgumentException($"Bet stake must be at least {new Money(1.00m, stake.Currency)}.");
 
         if (string.IsNullOrWhiteSpace(description))
