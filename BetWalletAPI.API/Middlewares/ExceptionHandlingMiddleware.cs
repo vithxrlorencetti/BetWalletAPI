@@ -56,6 +56,18 @@ public class ExceptionHandlingMiddleware
                 _logger.LogWarning(ex, ex.Message);
                 break;
 
+            case InsufficientBalanceException ex:
+                response.StatusCode = (int)HttpStatusCode.BadRequest;
+                errorResponse.Message = ex.Message;
+                _logger.LogWarning(ex, ex.Message);
+                break;
+
+            case InvalidBetStatusException ex:
+                response.StatusCode = (int)HttpStatusCode.BadRequest;
+                errorResponse.Message = ex.Message;
+                _logger.LogWarning(ex, ex.Message);
+                break;
+
             case ArgumentException ex:
                 response.StatusCode = (int)HttpStatusCode.BadRequest;
                 errorResponse.Message = ex.Message;
@@ -64,7 +76,7 @@ public class ExceptionHandlingMiddleware
 
             default:
                 response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                errorResponse.Message = "An internal server error occurred.";
+                errorResponse.Message = exception.Message;
                 _logger.LogError(exception, "Unhandled error: {Message}", exception.Message);
                 break;
         }

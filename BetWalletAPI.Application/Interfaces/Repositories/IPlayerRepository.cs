@@ -8,4 +8,5 @@ public interface IPlayerRepository
     Task<Player?> GetByIdAsync(Guid id);
     Task<Player?> GetByEmailAsync(Email email);
     Task<Player> AddAsync(Player player);
+    Task UpdateAsync(Player player);
 }

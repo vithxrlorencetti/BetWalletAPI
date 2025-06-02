@@ -1,9 +1,10 @@
 ﻿using BetWalletAPI.Application.Common;
 using BetWalletAPI.Application.Interfaces.Repositories;
 using BetWalletAPI.Domain.Entities;
+using BetWalletAPI.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-namespace BetWalletAPI.Infrastructure.Persistence.Repositories;
+namespace BetWalletAPI.Infrastructure.Repositories;
 
 public class TransactionRepository : ITransactionRepository
 {

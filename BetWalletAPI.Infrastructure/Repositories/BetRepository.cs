@@ -1,6 +1,8 @@
 ﻿using BetWalletAPI.Application.Common;
 using BetWalletAPI.Application.Interfaces.Repositories;
 using BetWalletAPI.Domain.Entities;
+using BetWalletAPI.Domain.Enums;
+using BetWalletAPI.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 
 namespace BetWalletAPI.Infrastructure.Persistence.Repositories;
@@ -54,5 +56,21 @@ public class BetRepository : IBetRepository
         _context.Entry(bet).State = EntityState.Modified;
         
         return Task.CompletedTask;
+    }
+
+    public async Task<Money> GetLastFiveAmountByPlayerIdAsync(Guid playerId)
+    {
+        var lastFiveBetsAmounts = await _context.Bets
+                .AsNoTracking()
+                .Where(b => b.PlayerId == playerId)
+                .OrderByDescending(b => b.CreatedAt)
+                .Take(5) 
+                .Select(b => b.Stake)
+                .ToListAsync();
+
+        var currency = lastFiveBetsAmounts.First().Currency;
+        var totalAmount = lastFiveBetsAmounts.Sum(e => e.Amount);
+
+        return new Money(totalAmount, currency);
     }
 }

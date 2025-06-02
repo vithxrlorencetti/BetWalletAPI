@@ -1,5 +1,6 @@
 ﻿using BetWalletAPI.Application.Interfaces.Persistence;
 using BetWalletAPI.Application.Interfaces.Repositories;
+using BetWalletAPI.Infrastructure.Persistence.Repositories;
 using BetWalletAPI.Infrastructure.Repositories;
 
 namespace BetWalletAPI.Infrastructure.Persistence
@@ -12,14 +13,16 @@ namespace BetWalletAPI.Infrastructure.Persistence
         public IPlayerRepository PlayerRepository { get; private set; }
         public IBetRepository BetRepository { get; private set; }
         public ITransactionRepository TransactionRepository { get; private set; }
+        public IWalletRepository WalletRepository { get; private set; }
 
         public UnitOfWork(AppDbContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
 
             PlayerRepository = new PlayerRepository(_context);
-            //BetRepository = new BetRepository(_context);
-            //TransactionRepository = new TransactionRepository(_context);
+            BetRepository = new BetRepository(_context);
+            TransactionRepository = new TransactionRepository(_context);
+            WalletRepository = new WalletRepository(_context);
         }
 
         public async Task<int> SaveChangesAsync()

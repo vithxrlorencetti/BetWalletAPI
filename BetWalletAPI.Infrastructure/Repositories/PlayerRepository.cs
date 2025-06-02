@@ -36,4 +36,13 @@ public class PlayerRepository : IPlayerRepository
 
         return player;
     }
+
+    public Task UpdateAsync(Player player)
+    {
+        if (player == null) throw new ArgumentNullException(nameof(player));
+
+        _context.Entry(player).State = EntityState.Modified;
+
+        return Task.CompletedTask;
+    }
 }
